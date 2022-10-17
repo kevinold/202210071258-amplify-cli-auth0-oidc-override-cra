@@ -24,5 +24,11 @@
         ]
       }
     }
+  },
+  "custom": {
+    "cognitoAuth0Oidc": {
+      "service": "customCDK",
+      "providerPlugin": "awscloudformation"
+    }
   }
 }
