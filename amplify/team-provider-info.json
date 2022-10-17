@@ -8,7 +8,13 @@
       "DeploymentBucketName": "amplify-202210071258amplifyc-dev-125905-deployment",
       "UnauthRoleName": "amplify-202210071258amplifyc-dev-125905-unauthRole",
       "StackName": "amplify-202210071258amplifyc-dev-125905",
-      "StackId": "arn:aws:cloudformation:us-east-1:074128318641:stack/amplify-202210071258amplifyc-dev-125905/bd3f5c30-4669-11ed-97eb-0a9abe08fbe3"
+      "StackId": "arn:aws:cloudformation:us-east-1:074128318641:stack/amplify-202210071258amplifyc-dev-125905/bd3f5c30-4669-11ed-97eb-0a9abe08fbe3",
+      "AmplifyAppId": "d25xdjhxga32k4"
+    },
+    "categories": {
+      "auth": {
+        "202210071258amplifycc161d33f": {}
+      }
     }
   }
 }
