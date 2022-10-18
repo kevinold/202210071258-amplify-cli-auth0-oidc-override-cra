@@ -28,7 +28,22 @@
   "custom": {
     "cognitoAuth0Oidc": {
       "service": "customCDK",
-      "providerPlugin": "awscloudformation"
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "202210071258amplifyc729c9e0f",
+          "attributes": [
+            "IdentityPoolId",
+            "IdentityPoolName",
+            "UserPoolId",
+            "UserPoolArn",
+            "UserPoolName",
+            "AppClientIDWeb",
+            "AppClientID"
+          ]
+        }
+      ]
     }
   }
 }

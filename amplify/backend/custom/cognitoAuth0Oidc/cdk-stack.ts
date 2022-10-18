@@ -1,5 +1,6 @@
 import * as AmplifyHelpers from '@aws-amplify/cli-extensibility-helper';
 import * as cdk from '@aws-cdk/core';
+import { AmplifyDependentResourcesAttributes } from '../../types/amplify-dependent-resources-ref';
 //import * as iam from '@aws-cdk/aws-iam';
 //import * as sns from '@aws-cdk/aws-sns';
 //import * as subs from '@aws-cdk/aws-sns-subscriptions';
@@ -17,13 +18,25 @@ export class cdkStack extends cdk.Stack {
 
     /* AWS CDK code goes here - learn more: https://docs.aws.amazon.com/cdk/latest/guide/home.html */
 
-    const amplifyProjectInfo = AmplifyHelpers.getProjectInfo();
-    const userPoolResourceNamePrefix = `cognito-userPool-${amplifyProjectInfo.projectName}`;
-    const userPool = new cognito.UserPool(this, 'cognitoUserPool', {
-      userPoolName: `${userPoolResourceNamePrefix}-${cdk.Fn.ref('env')}`
-    });
+    const dependencies: AmplifyDependentResourcesAttributes = AmplifyHelpers.addResourceDependency(this,
+      amplifyResourceProps.category,
+      amplifyResourceProps.resourceName,
+      [{
+        category: "auth", // api, auth, storage, function, etc.
+        resourceName: "202210071258amplifyc729c9e0f" // find the resource at "amplify/backend/<category>/<resourceName>"
+      } /* add more dependencies as needed */] 
+    );
 
-    const userPoolIdentityProviderOidc = new cognito.UserPoolIdentityProviderOidc(this, 'Auth0', {
+
+    // const amplifyProjectInfo = AmplifyHelpers.getProjectInfo();
+    // const userPoolResourceNamePrefix = `cognito-userPool-${amplifyProjectInfo.projectName}`;
+    // const userPool = new cognito.UserPool(this, 'cognitoUserPool', {
+    //   userPoolName: `${userPoolResourceNamePrefix}-${cdk.Fn.ref('env')}`
+    // });
+
+    const userPool = cognito.UserPool.fromUserPoolArn(this, "userPoolRef", cdk.Fn.ref(dependencies.auth['202210071258amplifyc729c9e0f'].UserPoolArn))
+
+    new cognito.UserPoolIdentityProviderOidc(this, 'Auth0', {
         clientId: 'bSdJVwMcFJEZtN1UXK5ChmHL3UTqjCP3',
         clientSecret: 'PiBfO113p1xaf-yDYxefXjFGFL5OWYdOV0LQVtt4TQhwyqvEey6BN4WcB0mKVFdD',
         issuerUrl: 'https://dev-kevold-amz.us.auth0.com',
@@ -31,6 +44,9 @@ export class cdkStack extends cdk.Stack {
         attributeRequestMethod: cognito.OidcAttributeRequestMethod.POST,
         scopes: ['email','profile','openid'],
       });
+
+
+    const clientWeb = cognito.UserPoolClient.fromUserPoolClientId(this, "userPoolClientWebRef", cdk.Fn.ref(dependencies.auth['202210071258amplifyc729c9e0f'].AppClientIDWeb))
     
     
     // Example 1: Set up an SQS queue with an SNS topic 
