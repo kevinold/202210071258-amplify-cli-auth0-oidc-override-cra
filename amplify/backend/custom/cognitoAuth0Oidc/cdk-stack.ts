@@ -36,8 +36,14 @@ export class cdkStack extends cdk.Stack {
 
     const userPool = cognito.UserPool.fromUserPoolArn(this, "userPoolRef", cdk.Fn.ref(dependencies.auth['202210071258amplifyc729c9e0f'].UserPoolArn))
 
+    userPool.addDomain('CognitoDomain', {
+      cognitoDomain: {
+        domainPrefix: '202210729c9e0f',
+      },
+    })
 
-    new cognito.UserPoolIdentityProviderOidc(this, 'Auth0', {
+    const auth0OidcProvider = new cognito.UserPoolIdentityProviderOidc(this, 'Auth0', {
+        name: "Auth0",
         clientId: 'bSdJVwMcFJEZtN1UXK5ChmHL3UTqjCP3',
         clientSecret: 'PiBfO113p1xaf-yDYxefXjFGFL5OWYdOV0LQVtt4TQhwyqvEey6BN4WcB0mKVFdD',
         issuerUrl: 'https://dev-kevold-amz.us.auth0.com',
@@ -48,20 +54,15 @@ export class cdkStack extends cdk.Stack {
 
     const clientWeb = cognito.UserPoolClient.fromUserPoolClientId(this, "userPoolClientWebRef", cdk.Fn.ref(dependencies.auth['202210071258amplifyc729c9e0f'].AppClientIDWeb))
 
+    // const newWebclient = userPool.addClient('newWebclient', {
+    //   supportedIdentityProviders: [
+    //     cognito.UserPoolClientIdentityProvider.custom("Auth0")
+    //   ],
+    // });
 
-    userPool.addDomain('CognitoDomain', {
-      cognitoDomain: {
-        domainPrefix: '202210729c9e0f',
-      },
-    })
+    // newWebclient.node.addDependency(auth0OidcProvider);
 
-    cognito.UserPoolClientIdentityProvider.custom("Auth0")
 
-    // const domain = userPool.addDomain('Auth0Domain', {
-    //   cognitoDomain: {
-    //     domainPrefix: "http://"
-    //   }
-    // })
     // Example 1: Set up an SQS queue with an SNS topic 
 
     /*
