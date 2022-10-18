@@ -42,6 +42,9 @@ export class cdkStack extends cdk.Stack {
         issuerUrl: 'https://dev-kevold-amz.us.auth0.com',
         userPool,
         attributeRequestMethod: cognito.OidcAttributeRequestMethod.POST,
+        attributeMapping: {
+          email: cognito.ProviderAttribute.other('email')
+        },
         scopes: ['email','profile','openid'],
       });
 
