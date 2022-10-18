@@ -15,9 +15,8 @@ function App() {
 
  return (
     <>
-      {authStatus === 'configuring' && 'Loading...'}
+      {(authStatus === 'configuring' || authStatus === 'unauthenticated') && <SignInWithAuth0/>}
       {authStatus === 'authenticated' && <TodoList />}
-      {authStatus === 'unauthenticated' && <SignInWithAuth0/>}
     </>
   );
 
