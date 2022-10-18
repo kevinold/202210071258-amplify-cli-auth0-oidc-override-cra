@@ -22,27 +22,20 @@ export class cdkStack extends cdk.Stack {
       amplifyResourceProps.category,
       amplifyResourceProps.resourceName,
       [{
-        category: "auth", // api, auth, storage, function, etc.
-        resourceName: "202210071258amplifyc729c9e0f" // find the resource at "amplify/backend/<category>/<resourceName>"
-      } /* add more dependencies as needed */] 
+        category: "auth", 
+        resourceName: "202210071258amplifyc729c9e0f"
+      }] 
     );
-
-
-    // const amplifyProjectInfo = AmplifyHelpers.getProjectInfo();
-    // const userPoolResourceNamePrefix = `cognito-userPool-${amplifyProjectInfo.projectName}`;
-    // const userPool = new cognito.UserPool(this, 'cognitoUserPool', {
-    //   userPoolName: `${userPoolResourceNamePrefix}-${cdk.Fn.ref('env')}`
-    // });
 
     const userPool = cognito.UserPool.fromUserPoolArn(this, "userPoolRef", cdk.Fn.ref(dependencies.auth['202210071258amplifyc729c9e0f'].UserPoolArn))
 
     userPool.addDomain('CognitoDomain', {
       cognitoDomain: {
-        domainPrefix: '202210729c9e0f',
+        domainPrefix: `202210071258amplifyc729c9e0f-${cdk.Fn.ref('env')}`,
       },
     })
 
-    const auth0OidcProvider = new cognito.UserPoolIdentityProviderOidc(this, 'Auth0', {
+    new cognito.UserPoolIdentityProviderOidc(this, 'Auth0', {
         name: "Auth0",
         clientId: 'bSdJVwMcFJEZtN1UXK5ChmHL3UTqjCP3',
         clientSecret: 'PiBfO113p1xaf-yDYxefXjFGFL5OWYdOV0LQVtt4TQhwyqvEey6BN4WcB0mKVFdD',
@@ -51,16 +44,6 @@ export class cdkStack extends cdk.Stack {
         attributeRequestMethod: cognito.OidcAttributeRequestMethod.POST,
         scopes: ['email','profile','openid'],
       });
-
-    const clientWeb = cognito.UserPoolClient.fromUserPoolClientId(this, "userPoolClientWebRef", cdk.Fn.ref(dependencies.auth['202210071258amplifyc729c9e0f'].AppClientIDWeb))
-
-    // const newWebclient = userPool.addClient('newWebclient', {
-    //   supportedIdentityProviders: [
-    //     cognito.UserPoolClientIdentityProvider.custom("Auth0")
-    //   ],
-    // });
-
-    // newWebclient.node.addDependency(auth0OidcProvider);
 
 
     // Example 1: Set up an SQS queue with an SNS topic 
