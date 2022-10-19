@@ -10,11 +10,13 @@ export function override(resources: AmplifyAuthCognitoStackTemplate) {
     resources.userPoolClient.addOverride("Properties.CallbackURLs", ["http://localhost:3000/"])
     resources.userPoolClient.addOverride("Properties.LogoutURLs", ["http://localhost:3000/"])
     resources.userPoolClient.addOverride("Properties.AllowedOAuthFlows", ["code"])
+    resources.userPoolClient.addOverride("Properties.AllowedOAuthFlowsUserPoolClient", "true")
     resources.userPoolClient.addOverride("Properties.AllowedOAuthScopes", allowedOAuthScopes)
 
     resources.userPoolClientWeb.addOverride("Properties.SupportedIdentityProviders", ["Auth0"])
     resources.userPoolClientWeb.addOverride("Properties.CallbackURLs", ["http://localhost:3000/"])
     resources.userPoolClientWeb.addOverride("Properties.LogoutURLs", ["http://localhost:3000/"])
     resources.userPoolClientWeb.addOverride("Properties.AllowedOAuthFlows", ["code"])
+    resources.userPoolClientWeb.addOverride("Properties.AllowedOAuthFlowsUserPoolClient", "true")
     resources.userPoolClientWeb.addOverride("Properties.AllowedOAuthScopes", allowedOAuthScopes)
 }
