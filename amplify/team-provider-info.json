@@ -17,6 +17,9 @@
       },
       "custom": {
         "auth0CognitoOIDC": {}
+      },
+      "api": {
+        "202210071258amplifyc": {}
       }
     }
   }
