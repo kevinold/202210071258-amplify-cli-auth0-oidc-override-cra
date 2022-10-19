@@ -42,7 +42,8 @@ function TodoList() {
       </div>
       <div>User: {user.username} </div>
       <div>
-        <button onClick={() => onCreateTodo(user) && getTodos()}>
+        <button onClick={() => onCreateTodo(user).then(() => getTodos().then((data) => setTodos(data.listTodos.items)).catch(() => console.log("error with todos"))
+          )}>
           Create Todo
         </button>
       </div>
