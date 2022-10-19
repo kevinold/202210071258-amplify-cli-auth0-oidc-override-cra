@@ -14,6 +14,9 @@
     "categories": {
       "auth": {
         "202210071258amplifyc1a0c34fe": {}
+      },
+      "custom": {
+        "auth0CognitoOIDC": {}
       }
     }
   }

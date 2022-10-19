@@ -27,6 +27,28 @@
       }
     }
   },
-  "custom": {},
+  "custom": {
+    "auth0CognitoOIDC": {
+      "service": "customCDK",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "202210071258amplifyc1a0c34fe",
+          "attributes": [
+            "IdentityPoolId",
+            "IdentityPoolName",
+            "HostedUIDomain",
+            "OAuthMetadata",
+            "UserPoolId",
+            "UserPoolArn",
+            "UserPoolName",
+            "AppClientIDWeb",
+            "AppClientID"
+          ]
+        }
+      ]
+    }
+  },
   "api": {}
 }
