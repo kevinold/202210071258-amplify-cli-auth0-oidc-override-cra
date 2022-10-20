@@ -8,7 +8,10 @@
         "skipFiles": ["<node_internals>/**"],
         "runtimeArgs": ["-r", "./node_modules/ts-node/register/transpile-only"],
         // Entry point of your stack
-        "args": ["${workspaceFolder}/amplify/backend/custom/auth0CognitoOIDC/cdk-stack.ts"]
+        "args": [
+          "${workspaceFolder}/amplify/backend/custom/auth0CognitoOIDC/cdk-stack.ts",
+          "-c", ""
+        ]
       }
     ]
   }
