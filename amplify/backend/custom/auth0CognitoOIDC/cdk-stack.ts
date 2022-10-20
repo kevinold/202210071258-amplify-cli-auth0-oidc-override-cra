@@ -40,23 +40,19 @@ export class cdkStack extends cdk.Stack {
         scopes: ['email','profile','openid'],
       });    
 
-    const allowedOAuthScopes = ["aws.cognito.signin.user.admin", "email", "openid", "phone", "profile"]
+    //const allowedOAuthScopes = ["aws.cognito.signin.user.admin", "email", "openid", "phone", "profile"]
+    //const userPoolClientWeb = cognito.UserPoolClient.fromUserPoolClientId(this, "userPoolClientRef", cdk.Fn.ref(dependencies.auth['202210071258amplifyc1a0c34fe'].AppClientIDWeb))
+    //console.log('uPCW: ', userPoolClientWeb)
 
-    const userPoolClientWeb = cognito.UserPoolClient.fromUserPoolClientId(this, "userPoolClientRef", cdk.Fn.ref(dependencies.auth['202210071258amplifyc1a0c34fe'].AppClientIDWeb))
+    //const userPoolClientWebUpdates = userPoolClientWeb.node.defaultChild as cognito.CfnUserPoolClient // undefined
+    //console.log('uPCWU: ', userPoolClientWebUpdates)
 
-    console.log('uPCW: ', userPoolClientWeb)
-
-    const userPoolClientWebUpdates = userPoolClientWeb.node.defaultChild // as cognito.CfnUserPoolClient
-
-    console.log('uPCWU: ', userPoolClientWebUpdates)
-
-    //userPoolClientWebUpdates.addPropertyOverride("SupportedIdentityProviders", ["Auth0"])
-
-    // userPoolClientWebUpdates.addOverride("Properties.CallbackURLs", ["http://localhost:3000/"])
-    // userPoolClientWebUpdates.addOverride("Properties.LogoutURLs", ["http://localhost:3000/"])
-    // userPoolClientWebUpdates.addOverride("Properties.AllowedOAuthFlows", ["code"])
-    // userPoolClientWebUpdates.addOverride("Properties.AllowedOAuthFlowsUserPoolClient", "true")
-    // userPoolClientWebUpdates.addOverride("Properties.AllowedOAuthScopes", allowedOAuthScopes)
+    // userPoolClientWebUpdates.addPropertyOverride("SupportedIdentityProviders", ["Auth0"])
+    // userPoolClientWebUpdates.addPropertyOverride("CallbackURLs", ["http://localhost:3000/"])
+    // userPoolClientWebUpdates.addPropertyOverride("LogoutURLs", ["http://localhost:3000/"])
+    // userPoolClientWebUpdates.addPropertyOverride("AllowedOAuthFlows", ["code"])
+    // userPoolClientWebUpdates.addPropertyOverride("AllowedOAuthFlowsUserPoolClient", "true")
+    // userPoolClientWebUpdates.addPropertyOverride("AllowedOAuthScopes", allowedOAuthScopes)
 
   }
 }
